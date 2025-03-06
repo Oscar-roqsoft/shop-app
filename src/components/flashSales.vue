@@ -35,8 +35,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const productNames = [
 "Quilted Satin Jacket", "Smart LED TV", "S-Series Comfort Chair", 
-    "Gaming Keyboard", "Laptop Backpack", "Wireless Mouse", 
-    "Men's Running Shoes", "Women's Handbag", "Kitchen Blender"
+    "Gaming Keyboard", "Gucci duffle bag", "RGB liquid CPU Cooler", 
+    "GP11 Shooter USB Gamepad", "Women's Handbag", "Kitchen Blender"
 ];
 
 const productImages = [
@@ -44,8 +44,10 @@ const productImages = [
     "/product/tv.png",
     "/product/chair.png",
     "/product/game.png",
-    "https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg",
-    "https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg",
+    "/product/bag.png",
+    "/product/cooler.png",
+    "/product/gpad.png",
+    
     "https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg",
     "https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg",
     "https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg",

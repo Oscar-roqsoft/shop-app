@@ -38,4 +38,8 @@
 .n-base-selection{
   border-radius: 20px !important;
 }
+
+.n-card-header{
+    font-size: 14px !important;
+}
 </style>

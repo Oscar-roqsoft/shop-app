@@ -25,7 +25,7 @@
                   quaternary 
                   size="large"
                   class="capitalize"
-                  @click="navigateTo(i.href, i.label)"
+                  @click="navigateToPath(i.href, i.label)"
                   :color="pinia.state.selectedNavMenu === i.label ? '#f17315' : 'black'">
                   {{ i.label }}
                 </n-button>
@@ -45,7 +45,7 @@
             </n-input>
 
             <n-badge  processing :value="value">
-              <n-button strong secondary circle size="large">
+              <n-button @click="navigateTo('/wishlist')" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 48 48">
@@ -103,7 +103,7 @@
               <n-button  quaternary  strong round size="large"
               :color="pinia.state.selectedNavMenu === i.label ? '#f17315' : 'black'">
                   <li 
-                    @click="navigateTo(i.href, i.label), toggleMenu" 
+                    @click="navigateToPath(i.href, i.label), toggleMenu" 
                     class="py-3 w-full capitalize text-left px-4 cursor-pointer hover:text-orange-500"
                      >
                     {{ i.label }}
@@ -152,7 +152,7 @@
   }
   
   // Navigate and close menu
-  const navigateTo = (path, label) => {
+  const navigateToPath = (path, label) => {
     useRouter().push(path)
     pinia.state.selectedNavMenu = label
     toggleMenu()
@@ -174,10 +174,10 @@
 const handleSelect = (key => {
   switch (key) {
     case 'profile':
-      navigateTo('/account')
+      navigateTo('/account/update')
       break
     case 'order':
-    console.log('Editing Profile...')
+      navigateTo('/order')
       break
     case 'logout':
       console.log('Logging out...')
@@ -195,7 +195,7 @@ const options = [
     icon: renderIcon('M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z')
   },
   {
-    label: 'My Order',
+    label: 'My Orders',
     key: 'order',
     icon: renderIcon('M21.7 7.3l-5-5c-.4-.4-1-.4-1.4 0l-11 11c-.2.2-.3.4-.3.7v5c0 .6.4 1 1 1h5c.3 0 .5-.1.7-.3l11-11c.4-.4.4-1 0-1.4zM7 18H5v-2l10-10 2 2-10 10zm12-12l-2-2 1.3-1.3 2 2L19 6z')
   },

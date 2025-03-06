@@ -7,11 +7,11 @@
         >
             <n-card :title="product.name" @click="navigateTo(`/product/${index}`)">
                 <template #cover>
-                    <img :src="product.image" class="w-full h-[200px] object-contain">
+                    <img :src="product.image" class="w-full h-[250px] object-contain">
                 </template>
 
                 <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold">${{ product.price }}</span>
+                    <span class="text-sm font-semibold">${{ product.price }}</span>
                     <div class="flex items-center gap-2">
                         <div
                             v-for="(color, i) in product.colors"
@@ -93,8 +93,10 @@ watch(currentPg, () => {
 <style scoped>
 .n-card {
     max-width: 100%;
+    height: 420px;
     border-radius: 10px;
 }
+
 </style>
 
 

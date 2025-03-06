@@ -95,6 +95,7 @@
                                 </n-button>
                                  
                              </div>
+                             
                             <n-button size="large" color="#f17315" style="width: 200px;">
                                 Buy now
                             </n-button>

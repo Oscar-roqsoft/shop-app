@@ -80,7 +80,8 @@
                           <span><b>Total:</b></span>
                           <span><b>€{{ totalPrice.toFixed(2) }}</b></span>
                         </n-flex>
-                        <n-button round size="large" class="mt-4" color="#f17315" block @click="checkout">Proceed to Checkout</n-button>
+                        <n-button 
+                         round size="large" class="mt-4" color="#f17315" block @click="checkout">Proceed to Checkout</n-button>
                       </div>
           
                 </div>
@@ -148,7 +149,7 @@
     itemToDelete.value = null;
   };
   
-  const checkout = () => alert('Proceeding to checkout!');
+  const checkout = () => navigateTo('/checkout');
   </script>
   
   <style scoped>
