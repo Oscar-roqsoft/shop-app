@@ -1,6 +1,7 @@
 <template>
 
     <div class="min-h-[80vh] pt-[160px] pb-[50px] md:pt-[130px]">
+
         <div class="md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 text-white">
 
             <n-breadcrumb>
@@ -84,20 +85,20 @@
 
                         <div class="mt-4 flex gap-4">
                             <!-- <n-input-number v-model="inputNumberValue" /> -->
-                            <div class="grid grid-cols-3 border items-center">
-                                <n-button strong secondary>
+                            <div class="grid grid-cols-3 border rounded items-center">
+                                <n-button strong secondary size="large">
                                     -
                                 </n-button>
                                 <div class="flex justify-center items-center">3</div>
-                                <n-button type="primary">
+                                <n-button color="#f17315" size="large">
                                     +
                                 </n-button>
                                  
                              </div>
-                            <n-button type="primary" style="width: 200px;">
+                            <n-button size="large" color="#f17315" style="width: 200px;">
                                 Buy now
                             </n-button>
-                            <n-button quaternary strong secondary>
+                            <n-button quaternary strong secondary size="large">
                                 <template #icon>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 48 48">
                                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" 

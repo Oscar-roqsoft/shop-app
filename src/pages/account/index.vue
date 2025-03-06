@@ -20,9 +20,9 @@
                             
 
                              <span class="text-[24px]">Log in to <h4 class="text-[32px] font-bold mb-[16px_!important] font-stretch-extra-expanded">
-                                Exclu<span class="text-[#1aa058]">sive</span></h4></span>
+                                Exclu<span class="text-[#f17315]">sive</span></h4></span>
 
-                             <p class="mb-[16px_!important]">You don't have an account? <a href="/account/create" class="text-[#1aa058]">Sign Up</a></p>
+                             <p class="mb-[16px_!important]">You don't have an account? <a href="/account/create" class="text-[#f17315]">Sign Up</a></p>
 
                             
                             <div class="flex items-center justify-center">
@@ -37,7 +37,7 @@
                                     <n-input size="large" round v-model:value="modelRef.password" type="password" placeholder="Enter your password" />
                                   </n-form-item>
                           
-                                  <n-button class="mt-4" type="primary" size="large" round block @click="handleLogin">Login</n-button>
+                                  <n-button class="mt-4" color="#f17315" size="large" round block @click="handleLogin">Login</n-button>
                         
                                   <n-button class="mt-[24px_!important]" ghost color="#4385f5" size="large" round block @click="handleLogin">
                                     <template #icon>

@@ -31,7 +31,6 @@
                         </a></li>
                         <li><a href="mailto:contact.laboiserie@gmail.com" class="hover:text-gray-400">
                             Phone No: +88015-88888-9999
-
                         </a></li>
                         <!-- <li><a href="mailto:contact.laboiserie@gmail.com" class="hover:text-gray-400">
                             : +44 7876 210359 

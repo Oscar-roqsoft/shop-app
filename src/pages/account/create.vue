@@ -22,7 +22,7 @@
     
                             <h2 class="text-[24px]">Sign Up</h2>
     
-                            <p class="mb-[16px_!important]">Already have an account? <a href="/account" class="text-[#1aa058]">Sign In</a></p>
+                            <p class="mb-[16px_!important]">Already have an account? <a href="/account" class="text-[#f17315]">Sign In</a></p>
     
                             <div class="flex items-center py-8 justify-center">
     
@@ -67,7 +67,7 @@
                                         <n-row :gutter="[0, 2]">
                                             <n-col :span="24" style=" width: 100% !important;">
                                             <div style=" width: 100% !important; margin-top: 16px !important;">
-                                                <n-button style=" width: 100% !important;" size="large"  round type="primary" @click="handleValidateButtonClick">
+                                                <n-button style=" width: 100% !important;" size="large"  round color="#f17315" @click="handleValidateButtonClick">
                                                 Register
                                                 </n-button>
                                             </div>
