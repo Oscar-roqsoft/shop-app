@@ -3,8 +3,9 @@
       <div class="md:max-w-[1200px] mx-auto w-full h-full px-4 md:px-0">
         <div class="flex flex-wrap justify-between items-center py-5">
           <!-- Logo -->
-          <div>
+          <div class="w-[50px]">
             <span class="text-[30px] font-bold">Exclusive</span>
+            <!-- <img class="w-full" src="/logo/logo1.jpg" alt=""> -->
           </div>
 
            <!-- Mobile Menu Button -->
@@ -134,7 +135,7 @@
   const navItems = [
     { label: 'home', href: '/' },
     { label: 'contact', href: '/contact' },
-    { label: 'about', href: '/about-us' },
+    { label: 'about', href: '/about' },
     { label: 'sign up', href: '/account' },
   ]
   
