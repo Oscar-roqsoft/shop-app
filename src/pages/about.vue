@@ -29,7 +29,7 @@
                     
                 </div>
 
-                <div class="bg-[url('/bg/bg-girls.png')] bg-cover rounded-md ">
+                <div class="bg-[url('/bg/bg-girls.png')] bg-cover rounded-md h-[400px] md:h-full">
 
                 </div>
 
