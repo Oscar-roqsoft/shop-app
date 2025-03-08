@@ -1,5 +1,5 @@
 <template>
-    <div class=" min-h-[80vh] pb-24 pt-[140px] md:pb-[130px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
+    <div class=" min-h-[80vh] pb-24 pt-[100px] md:pt-[120px] md:pb-[130px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
 
         <div class=" flex justify-center items-center  h-full mx-[16px_!important] md:mx-0">
                 <div class="flex items-center  overflow-hidden  border-[#e2e2e2] h-full md:h-[580px]   w-full rounded-3xl">

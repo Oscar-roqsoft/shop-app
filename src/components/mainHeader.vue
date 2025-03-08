@@ -151,8 +151,6 @@
 
   console.log(path)
 
-
-
   
   const pinia = useStore()
   const value = ref(2)
