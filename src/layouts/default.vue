@@ -10,6 +10,12 @@
 </template>
 
 
-<!-- <script setup>
+<script setup>
 
-</script> -->
+const route = useRouter()
+
+const path = route.currentRoute.value.path
+
+console.log(path)
+
+</script>

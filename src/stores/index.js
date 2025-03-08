@@ -38,7 +38,7 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore('Shop', () => {
 
   const state = reactive({
-    projects:[],
+    user:null,
     testimonial:[],
     current_page:'home',
     selectedNavMenu:'home',
@@ -47,8 +47,8 @@ export const useStore = defineStore('Shop', () => {
     isloadingPriceCard:false
   });
 
-    const setProjects = (payload)=>{
-        state.projects = payload
+    const setUser = (payload)=>{
+        state.user = payload
     }
     const setTestimonial = (payload)=>{
         state.testimonial = payload
@@ -73,7 +73,7 @@ export const useStore = defineStore('Shop', () => {
   }
 
   return {
-    setpricingPlans,
+    setUser,
     state,
     clearUser
     

@@ -1,3 +1,3 @@
 
 
-export const baseURL = 'https://api-v1.belugar.com/v1'
+export const baseURL = 'https://shop-app-backend-ot6i.onrender.com/api/v1'

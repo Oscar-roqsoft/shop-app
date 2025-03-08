@@ -1,51 +1,54 @@
 <template>
-    <div class=" min-h-[90vh] pb-24 pt-[150px] md:pb-[130px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
+    <div class=" min-h-[80vh] pb-24 pt-[140px] md:pb-[130px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
 
         <div class=" flex justify-center items-center  h-full mx-[16px_!important] md:mx-0">
-                <div class="flex items-center  overflow-hidden  border-[#e2e2e2] h-full md:h-[680px]   w-full rounded-3xl">
+                <div class="flex items-center  overflow-hidden  border-[#e2e2e2] h-full md:h-[580px]   w-full rounded-3xl">
     
                     <div class="md:w-[60%] hidden md:block ">
     
                         <n-image
                             width="100%"
                             class=""
-                            src="/product/phone.png"
+                            src="/bglogin2.jpg"
                         />
     
                     </div>
 
-                    <div class="md:w-[40%] w-[100%] md:overflow-auto flex h-full  justify-center md:px-[30px_!important] py-6 md:py-[14_!important]">
+                    <div class="md:w-[40%] w-[100%]  flex h-full  justify-center md:px-[20px_!important] py-6 md:pt-[2px_!important]">
     
-                        <div class="w-full h-[inherit]  rounded-2xl md:px-[14px_!important] pb-[14px_!important]">
+                        <div class="w-full h-[inherit]  rounded-2xl md:px-[14px_!important] ">
                             <!-- <h4 class="text-[32px] font-bold mb-[16px_!important] font-stretch-extra-expanded">
                                 Motor<span class="text-[#1aa058]">Parts</span></h4> -->
     
-                            <h2 class="text-[24px]">Sign Up</h2>
+                            <h2 class="text-[20px] font-semibold">Sign Up </h2>
     
-                            <p class="mb-[16px_!important]">Already have an account? <a href="/account" class="text-[#f17315]">Sign In</a></p>
+                            <!-- <p class="mb-[14px_!important]">Already have an account? <a href="/account" class="text-[#f17315]">Sign In</a></p> -->
     
-                            <div class="flex items-center py-8 justify-center">
+                            <div class="flex items-center py-4 justify-center">
     
-                                <div class="w-full max-w-md  rounded-lg">
+                                <div class="w-full  rounded-lg">
         
-                                    <n-form ref="formRef" :model="modelRef" :rules="rules">
+                                  <n-form ref="formRef" :model="modelRef" :rules="rules">
+
+                                  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+
                                         <n-form-item path="fullName" label="Full Name">
-                                            <n-input size="large" round v-model:value="modelRef.fullName" placeholder="Enter full name" @keydown.enter.prevent />
+                                            <n-input size="large"  v-model:value="modelRef.fullName" placeholder="Enter full name" @keydown.enter.prevent />
                                         </n-form-item>
                                     
-                                        <n-form-item path="username" label="Username">
-                                            <n-input size="large" round v-model:value="modelRef.username" placeholder="Choose a username" @keydown.enter.prevent />
+                                        <!-- <n-form-item path="username" label="Username">
+                                            <n-input size="large"  v-model:value="modelRef.username" placeholder="Choose a username" @keydown.enter.prevent />
+                                        </n-form-item> -->
+                                    
+                                        <n-form-item  path="email" label="Email">
+                                            <n-input size="large"  v-model:value="modelRef.email" placeholder="Enter email" type="email" @keydown.enter.prevent />
                                         </n-form-item>
                                     
-                                        <n-form-item path="email" label="Email">
-                                            <n-input size="large" round v-model:value="modelRef.email" placeholder="Enter email" type="email" @keydown.enter.prevent />
-                                        </n-form-item>
-                                    
-                                        <n-form-item path="country" label="Country">
+                                        <n-form-item class=" md:col-span-2" path="country" label="Country">
                                             <client-only>
                                             <n-select
                                             size="large"
-                                            round
+                                            
                                             v-model:value="modelRef.country"
                                             :options="countryOptions"
                                             :render-label="renderLabel"
@@ -56,26 +59,33 @@
                                         </client-only>
                                         </n-form-item>
                                     
-                                        <n-form-item path="password" label="Password">
-                                            <n-input size="large" round v-model:value="modelRef.password" type="password" placeholder="Enter password" @keydown.enter.prevent />
+                                        <n-form-item class=" md:col-span-2" path="password" label="Password">
+                                            <n-input size="large"  v-model:value="modelRef.password" type="password" placeholder="Enter password" @keydown.enter.prevent />
                                         </n-form-item>
                                     
-                                        <n-form-item ref="rPasswordFormItemRef" path="reenteredPassword" label="Re-enter Password">
-                                            <n-input size="large" round v-model:value="modelRef.reenteredPassword" :disabled="!modelRef.password" type="password" placeholder="Confirm password" @keydown.enter.prevent />
+                                        <n-form-item class=" md:col-span-2" ref="rPasswordFormItemRef" path="reenteredPassword" label="Re-enter Password">
+                                            <n-input size="large"  v-model:value="modelRef.reenteredPassword" :disabled="!modelRef.password" type="password" placeholder="Confirm password" @keydown.enter.prevent />
                                         </n-form-item>
-                                    
+
+                                        <n-checkbox color="#f17315"  v-model:value="check" class=" md:col-span-2 custom-checkbox" size="large" label="I agree to all the statements in terms of service" />
+
+
                                         <n-row :gutter="[0, 2]">
                                             <n-col :span="24" style=" width: 100% !important;">
-                                            <div style=" width: 100% !important; margin-top: 16px !important;">
-                                                <n-button style=" width: 100% !important;" size="large"  round color="#f17315" @click="handleValidateButtonClick">
-                                                Register
+                                            <div style=" width: 100% !important; margin-top: 24px !important;">
+                                                <n-button :disabled="isAuthenticating" style=" width: 100% !important;" size="large"   color="#f17315" @click="handleValidateButtonClick">
+                                                  <div class="flex items-center gap-4">
+                                                    <n-spin v-if="isAuthenticating" size="small" stroke="#fff" />
+                                                    <span v-else class="text-[#fff]">Register</span>
+                                                  </div>
                                                 </n-button>
                                             </div>
                                             </n-col>
                                         </n-row>
-
-
-                                        <n-button class="mt-[24px_!important]" ghost color="#4385f5" size="large" round block @click="handleLogin">
+      
+        
+                                      
+                                        <n-button class="mt-[24px_!important]" ghost type="default" size="large"  block @click="handleLogin">
                                             <template #icon>
                                                 <n-icon>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
@@ -88,6 +98,13 @@
                                             </template>
                                             Sign In With Google
                                         </n-button>
+
+                                        <p class="mt-[24px_!important] md:col-span-2 text-center">Already have an account? <a href="/account" class="text-[#f17315] underline">Sign In</a></p>
+                                       <!-- <a href="/account" class="text-[#f17315] mt-[20px_!important] md:col-span-2 text-center underline">Forgot password</a> -->
+
+                                  </div>
+                                    
+
                                     </n-form>
                                 </div>
                             </div>
@@ -108,10 +125,20 @@
  
 <script setup>
 import { ref, h } from "vue";
-import { NAvatar, NForm, NFormItem, NInput, NButton, NSelect,NCol,NRow,NImage } from "naive-ui";
+import { NAvatar, NForm, NFormItem, NInput, NButton, NSelect,NCol,NRow,NImage,NSpin,NCheckbox } from "naive-ui";
+import {useStore } from '@/stores/index'
+import { useNotify } from '@/composables/mixins'; // Adjust path as needed
+import { signUp } from '@/composables/requests/auth'; // Adjust path as needed
+
+
+const { notify } = useNotify();
+const pinia = useStore()
 
 const formRef = ref(null);
 const rPasswordFormItemRef = ref(null);
+
+const isAuthenticating = ref(false)
+const check = ref(false)
 
 const modelRef = ref({
   fullName: "",
@@ -171,7 +198,7 @@ const renderSingleSelectTag = ({ option }) => {
 // Validation rules
 const rules = {
   fullName: [{ required: true, message: "Full Name is required", trigger: ["input", "blur"] }],
-  username: [{ required: true, message: "Username is required", trigger: ["input", "blur"] }],
+  // username: [{ required: true, message: "Username is required", trigger: ["input", "blur"] }],
   email: [
     { required: true, message: "Email is required", trigger: ["input", "blur"] },
     { type: "email", message: "Invalid email format", trigger: ["input", "blur"] }
@@ -188,21 +215,72 @@ const rules = {
   ]
 };
 
+
 const handleValidateButtonClick = () => {
-  formRef.value?.validate((errors) => {
+  formRef.value?.validate(async(errors) => {
     if (!errors) {
-      alert("Registration successful!");
+      isAuthenticating.value = true
+        try{
+        const payload = {
+          name:modelRef.value.fullName,
+          email:modelRef.value.email,
+          country:modelRef.value.country,
+          password: modelRef.value.password,
+          role:'user'
+        }
+        const data = await signUp(payload)
+        if(data.success){
+          pinia.setUser(data)
+          notify('success', 'Successfully logged in')
+          navigateTo('/')
+        }else{
+          notify('error', 'Failed log in')
+        }
+
+        isAuthenticating.value = false
+        }catch(e){
+        console.log(e)
+        isAuthenticating.value = false
+        }
+
+        modelRef.value = {
+        fullName: "",
+        username: "",
+        email: "",
+        country: null,
+        password: "",
+        reenteredPassword: ""
+      };
     }
   });
 };
 
+
+
 const handleLogin = () => {
     console.log(modelRef.value)
-    formRef.value?.validate((errors) => {
+    formRef.value?.validate( async(errors) => {
       if (!errors) {
-        console.log(modelRef.value)
-        alert("Login successful!"); // Replace with actual login logic
+        
+        
       }
     });
   };
 </script>
+
+
+<style>
+.custom-checkbox :deep(.n-checkbox__box) {
+  border-color: #f17315 !important;
+}
+
+.custom-checkbox :deep(.n-checkbox__box:hover) {
+  background-color: #f17315 !important;
+  border-color: #f17315 !important;
+}
+
+.custom-checkbox .n-checkbox.n-checkbox--checked :deep( .n-checkbox-box) {
+  background-color: #f17315 !important;
+  /* border-color: #f17315 !important; */
+}
+</style>

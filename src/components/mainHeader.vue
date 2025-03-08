@@ -18,7 +18,7 @@
           </div>
   
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center gap-6 cursor-pointer">
+          <div class="hidden md:flex items-center gap-6 cursor-pointer" >
             <ul v-for="(i, index) in navItems" :key="index">
               <li>
                 <n-button 
@@ -27,15 +27,18 @@
                   size="large"
                   class="capitalize"
                   @click="navigateToPath(i.href, i.label)"
-                  :color="pinia.state.selectedNavMenu === i.label ? '#f17315' : 'black'">
-                  {{ i.label }}
+                  color="default"
+                 >
+                  <span  :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'">
+                    {{ i.label }}
+                  </span>
                 </n-button>
               </li>
             </ul>
           </div>
   
           <!-- Icons & Search (Desktop Only) -->
-          <div class="flex items-center mt-4 md:mt-0 gap-4">
+          <div class="flex items-center mt-4 md:mt-0 gap-4" :class="path === '/account/create' || path === '/account'? 'hidden':''">
             <n-input size="large" round placeholder="Search for items ...">
               <template #suffix>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -59,7 +62,7 @@
             </n-badge>
 
 
-            <n-badge  processing :value="value">
+            <n-badge  processing :value="value" >
               <n-button @click="navigateTo('/cart')" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
@@ -70,7 +73,8 @@
             </n-badge>
 
             <n-dropdown :options="options" @select="handleSelect">
-                <n-button strong secondary circle size="large">
+                <n-button strong secondary circle size="large" 
+                >
                 <template #icon>
                     <n-icon>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20zm2-2h12v-.8q0-.275-.137-.5t-.363-.35q-1.35-.675-2.725-1.012T12 15t-2.775.338T6.5 16.35q-.225.125-.363.35T6 17.2zm6-8q.825 0 1.413-.587T14 8t-.587-1.412T12 6t-1.412.588T10 8t.588 1.413T12 10m0 8"/></svg>                
@@ -107,7 +111,9 @@
                     @click="navigateToPath(i.href, i.label), toggleMenu" 
                     class="py-3 w-full capitalize text-left px-4 cursor-pointer hover:text-orange-500"
                      >
+                     <span  :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'">
                     {{ i.label }}
+                  </span>
                   </li>
               </n-button>
           </ul>
@@ -129,6 +135,24 @@
   import gsap from 'gsap'
   import { NButton, NInput, NIcon, NBadge,NDropdown } from 'naive-ui'
   import { useStore } from '@/stores/index'
+
+  const route = useRouter()
+
+  const path = ref(route.currentRoute.value.path)
+
+
+  // if(){
+
+  // }
+
+ watchEffect(()=>{
+  path.value = route.currentRoute.value.path
+ })
+
+  console.log(path)
+
+
+
   
   const pinia = useStore()
   const value = ref(2)

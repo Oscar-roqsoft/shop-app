@@ -37,7 +37,7 @@
                                     <n-input size="large" round v-model:value="modelRef.password" type="password" placeholder="Enter your password" />
                                   </n-form-item>
                           
-                                  <n-button class="mt-4" color="#f17315" size="large" round block @click="handleLogin">Login</n-button>
+                                  <n-button class="mt-4" color="#f17315" size="large" round block @click="notify('info', 'This is an info message')">Login</n-button>
                         
                                   <n-button class="mt-[24px_!important]" ghost color="#4385f5" size="large" round block @click="handleLogin">
                                     <template #icon>
@@ -75,6 +75,9 @@
   <script setup>
   import { ref } from "vue";
   import { NForm, NFormItem, NInput, NButton,NImage } from "naive-ui";
+  import { useNotify } from '@/composables/mixins'; // Adjust path as needed
+
+  const { notify } = useNotify();
   
   const formRef = ref(null);
   const modelRef = ref({
