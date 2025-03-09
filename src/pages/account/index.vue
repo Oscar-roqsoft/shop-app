@@ -1,20 +1,21 @@
 <template>
-    <div class=" min-h-[70vh] pt-[140px] md:pb-[100px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
+    <div class=" min-h-[70vh] pt-[100px] md:pt-[140px] md:pb-[100px] md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 ">
 
         <div class=" flex justify-center items-center  h-full mx-[16px_!important] md:mx-0">
                 <div class="flex overflow-hidden  items-center  border-[#e2e2e2]  h-[650px] w-full rounded-3xl">
     
-                    <div class="md:w-[60%] hidden md:block">
+                    <div class="md:w-[60%] h-[580px] hidden md:block">
     
                         <n-image
                             width="100%"
                             class=""
-                            src="/product/phone.png"
+                            src="/bg5.jpg"
+                            style="border-radius: 10px;"
                         />
     
                     </div>
 
-                    <div class="md:w-[40%] w-[100%] flex h-full  justify-center md:px-[30px_!important] py-[14px_!important]">
+                    <div class="md:w-[40%] w-[100%] flex h-full  justify-center md:px-[30px_!important] pt-[24px_!important]">
 
                         <div class="w-full h-[inherit] overflow-y-auto md:p-4 rounded-2xl md:px-[14px_!important] py-[14px_!important]">
                             
@@ -22,24 +23,28 @@
                              <span class="text-[24px]">Log in to <h4 class="text-[32px] font-bold mb-[16px_!important] font-stretch-extra-expanded">
                                 Exclu<span class="text-[#f17315]">sive</span></h4></span>
 
-                             <p class="mb-[16px_!important]">You don't have an account? <a href="/account/create" class="text-[#f17315]">Sign Up</a></p>
 
                             
                             <div class="flex items-center justify-center">
-                              <div class="w-full max-w-md py-8 rounded-lg ">
+                              <div class="w-full max-w-md rounded-lg ">
                           
                                 <n-form ref="formRef" :model="modelRef" :rules="rules">
                                   <n-form-item path="email" label="Email">
-                                    <n-input size="large" round v-model:value="modelRef.email" type="email" placeholder="Enter your email" />
+                                    <n-input size="large"  v-model:value="modelRef.email" type="email" placeholder="Enter your email" />
                                   </n-form-item>
                           
                                   <n-form-item path="password" label="Password">
-                                    <n-input size="large" round v-model:value="modelRef.password" type="password" placeholder="Enter your password" />
+                                    <n-input size="large"  v-model:value="modelRef.password" type="password" placeholder="Enter your password" />
                                   </n-form-item>
                           
-                                  <n-button class="mt-4" color="#f17315" size="large" round block @click="notify('info', 'This is an info message')">Login</n-button>
+                                  <n-button :disabled="isAuthenticating" class="mt-4" color="#f17315" size="large"  block @click="handleLogin">
+                                    <div class="flex items-center gap-4">
+                                        <n-spin v-if="isAuthenticating" size="small" stroke="#fff" />
+                                        <span v-else class="text-[#fff]">Login</span>
+                                      </div>
+                                  </n-button>
                         
-                                  <n-button class="mt-[24px_!important]" ghost color="#4385f5" size="large" round block @click="handleLogin">
+                                  <n-button class="mt-[24px_!important]" ghost size="large"  block @click="handleLogin">
                                     <template #icon>
                                         <n-icon>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
@@ -52,6 +57,12 @@
                                     </template>
                                     Sign In With Google
                                   </n-button>
+
+                                  <p class="mt-[24px_!important] text-center">You don't have an account? <a href="/account/create" class="text-[#f17315]">Sign Up</a></p>
+                                   <p class="mt-[10px_!important] text-center">
+                                     <a href="/account/recover-password" class="text-[#f17315] mt-[20px_!important] md:col-span-2 w-full text-center underline">Forgot password</a>
+                                   </p>
+
                                 </n-form>
                             </div>
                             </div>
@@ -74,10 +85,17 @@
   
   <script setup>
   import { ref } from "vue";
-  import { NForm, NFormItem, NInput, NButton,NImage } from "naive-ui";
+  import { NForm, NFormItem, NInput, NButton,NImage,NSpin } from "naive-ui";
   import { useNotify } from '@/composables/mixins'; // Adjust path as needed
+  import { signIn } from '@/composables/requests/auth'; // Adjust path as needed
+  import {useStore } from '@/stores/index'
+
+
+   const pinia = useStore()
 
   const { notify } = useNotify();
+
+  const isAuthenticating = ref(false)
   
   const formRef = ref(null);
   const modelRef = ref({
@@ -95,10 +113,33 @@
   
   const handleLogin = () => {
     console.log(modelRef.value)
-    formRef.value?.validate((errors) => {
+    formRef.value?.validate(async(errors) => {
       if (!errors) {
-        console.log(modelRef.value)
-        alert("Login successful!"); // Replace with actual login logic
+        isAuthenticating.value = true
+        try{
+        const payload = {
+          email:modelRef.value.email,
+          password: modelRef.value.password,
+        }
+        const data = await signIn(payload)
+        if(data.success){
+          pinia.setUser(data.data)
+          notify('success', 'Successfully logged in')
+          navigateTo('/')
+        }else{
+          notify('error', data.message)
+        }
+
+        isAuthenticating.value = false
+        }catch(e){
+        console.log(e)
+        isAuthenticating.value = false
+        }
+
+        modelRef.value = {
+        email: "",
+        password: "",
+      };
       }
     });
   };

@@ -10,6 +10,7 @@
                             width="100%"
                             class=""
                             src="/bglogin2.jpg"
+                            style="border-radius: 20px;"
                         />
     
                     </div>
@@ -100,7 +101,6 @@
                                         </n-button>
 
                                         <p class="mt-[24px_!important] md:col-span-2 text-center">Already have an account? <a href="/account" class="text-[#f17315] underline">Sign In</a></p>
-                                       <!-- <a href="/account" class="text-[#f17315] mt-[20px_!important] md:col-span-2 text-center underline">Forgot password</a> -->
 
                                   </div>
                                     
@@ -230,7 +230,7 @@ const handleValidateButtonClick = () => {
         }
         const data = await signUp(payload)
         if(data.success){
-          pinia.setUser(data)
+          pinia.setUser(data.data)
           notify('success', 'Successfully logged in')
           navigateTo('/')
         }else{

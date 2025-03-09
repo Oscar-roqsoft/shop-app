@@ -22,7 +22,6 @@
             <ul v-for="(i, index) in navItems" :key="index">
               <li>
                 <n-button 
-                  round
                   quaternary 
                   size="large"
                   class="capitalize"
@@ -38,7 +37,8 @@
           </div>
   
           <!-- Icons & Search (Desktop Only) -->
-          <div class="flex items-center mt-4 md:mt-0 gap-4" :class="path === '/account/create' || path === '/account'? 'hidden':''">
+          <div class="flex items-center mt-4 md:mt-0 gap-4" 
+          :class="path === '/account/create' || path === '/account' || path=== '/account/recover-password'? 'hidden':''">
             <n-input size="large" round placeholder="Search for items ...">
               <template #suffix>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
            </div> -->
   
            <ul v-for="(i, index) in navItems" :key="index" class="text-lg w-full">
-              <n-button  quaternary  strong round size="large"
+              <n-button  quaternary  strong  size="large"
               :color="pinia.state.selectedNavMenu === i.label ? '#f17315' : 'black'">
                   <li 
                     @click="navigateToPath(i.href, i.label), toggleMenu" 
@@ -135,6 +135,8 @@
   import gsap from 'gsap'
   import { NButton, NInput, NIcon, NBadge,NDropdown } from 'naive-ui'
   import { useStore } from '@/stores/index'
+
+
 
   const route = useRouter()
 
@@ -203,7 +205,8 @@ const handleSelect = (key => {
       navigateTo('/order')
       break
     case 'logout':
-      console.log('Logging out...')
+       pinia.clearUser
+       navigateTo('/account')
       break
     default:
     console.log('Unknown action')

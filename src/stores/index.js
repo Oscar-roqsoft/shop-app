@@ -42,13 +42,11 @@ export const useStore = defineStore('Shop', () => {
     testimonial:[],
     current_page:'home',
     selectedNavMenu:'home',
-    pricingPlans:[],
-    selected_dispute_status:'all',
-    isloadingPriceCard:false
   });
 
     const setUser = (payload)=>{
         state.user = payload
+        console.log(payload)
     }
     const setTestimonial = (payload)=>{
         state.testimonial = payload
@@ -67,8 +65,11 @@ export const useStore = defineStore('Shop', () => {
  
 
   const clearUser =()=>{
-    state.pricingPlans = []
-    state.isloadingPriceCard = false
+    state = {
+      user:null,
+      current_page:'home',
+      selectedNavMenu:'home',
+    };
 
   }
 
