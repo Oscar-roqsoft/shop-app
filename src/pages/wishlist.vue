@@ -26,7 +26,7 @@
                 <!-- <tag-header text="Related Item"/> -->
                  <div class="flex justify-between items-center">
                      <h1 class="text-[black] text-lg">Wishlist (4)</h1>
-                     <n-button round  size="large" color="#f17315" ghost solid style="width: 200px;">
+                     <n-button   size="large" color="#f17315" ghost solid style="width: 200px;">
                          Clear all
                     </n-button>
                  </div>

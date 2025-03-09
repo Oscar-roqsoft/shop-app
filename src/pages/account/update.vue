@@ -12,15 +12,15 @@
 
             <n-form ref="formRef" :model="formData" :rules="rules">
                 <n-form-item path="name" label="Full Name">
-                    <n-input v-model:value="formData.name" placeholder="Enter your full name" size="large" round />
+                    <n-input v-model:value="formData.name" placeholder="Enter your full name" size="large"/>
                 </n-form-item>
 
                 <n-form-item path="email" label="Email">
-                    <n-input v-model:value="formData.email" placeholder="Enter your email" size="large" type="email" round />
+                    <n-input v-model:value="formData.email" placeholder="Enter your email" size="large" type="email"/>
                 </n-form-item>
 
                 <n-form-item path="phone" label="Phone Number">
-                    <n-input v-model:value="formData.phone" placeholder="Enter your phone number" size="large" type="tel" round />
+                    <n-input v-model:value="formData.phone" placeholder="Enter your phone number" size="large" type="tel"/>
                 </n-form-item>
 
                 <n-form-item path="country" label="Country">
@@ -34,22 +34,22 @@
                 </n-form-item>
 
                 <n-form-item path="address" label="Address">
-                    <n-input v-model:value="formData.address" placeholder="Enter your address" size="large" round />
+                    <n-input v-model:value="formData.address" placeholder="Enter your address" size="large"/>
                 </n-form-item>
 
                 <n-form-item path="password" label="New Password">
-                    <n-input v-model:value="formData.password" size="large" type="password" placeholder="Enter new password" round />
+                    <n-input v-model:value="formData.password" size="large" type="password" placeholder="Enter new password"/>
                 </n-form-item>
 
                 <n-form-item path="confirmPassword" label="Confirm Password">
-                    <n-input v-model:value="formData.confirmPassword" size="large" type="password" placeholder="Confirm new password" round />
+                    <n-input v-model:value="formData.confirmPassword" size="large" type="password" placeholder="Confirm new password" />
                 </n-form-item>
 
                 <n-checkbox  color="#f17315" v-model:checked="formData.saveInfo">
                     Save this information for future use
                 </n-checkbox>
 
-                <n-button round color="#f17315" block size="large" class="mt-4" @click="updateProfile">
+                <n-button color="#f17315" block size="large" class="mt-4" @click="updateProfile">
                     Save Changes
                 </n-button>
             </n-form>

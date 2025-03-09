@@ -16,27 +16,27 @@
                     <div>
                         <n-form ref="formRef" :model="formData" :rules="rules">
                             <n-form-item label="Full Name" path="fullName">
-                                <n-input v-model:value="formData.fullName" placeholder="Enter your full name" size="large" round />
+                                <n-input v-model:value="formData.fullName" placeholder="Enter your full name" size="large"  />
                             </n-form-item>
 
                             <n-form-item label="Email" path="email">
-                                <n-input v-model:value="formData.email" type="email" placeholder="Enter your email" size="large" round />
+                                <n-input v-model:value="formData.email" type="email" placeholder="Enter your email" size="large"  />
                             </n-form-item>
 
                             <n-form-item label="Street Address" path="streetAddress">
-                                <n-input v-model:value="formData.streetAddress" placeholder="Enter your street address" size="large" round />
+                                <n-input v-model:value="formData.streetAddress" placeholder="Enter your street address" size="large"  />
                             </n-form-item>
 
                             <n-form-item label="City" path="city">
-                                <n-input v-model:value="formData.city" placeholder="Enter your city" size="large" round />
+                                <n-input v-model:value="formData.city" placeholder="Enter your city" size="large"  />
                             </n-form-item>
 
                             <n-form-item label="Phone Number" path="phoneNumber">
-                                <n-input-number v-model:value="formData.phoneNumber" placeholder="Enter your phone number" size="large" round class="w-full" />
+                                <n-input-number v-model:value="formData.phoneNumber" placeholder="Enter your phone number" size="large"  class="w-full" />
                             </n-form-item>
 
                             <n-form-item label="Zip Code" path="zipCode">
-                                <n-input v-model:value="formData.zipCode" placeholder="Enter your zip code" size="large" round />
+                                <n-input v-model:value="formData.zipCode" placeholder="Enter your zip code" size="large"  />
                             </n-form-item>
 
                             <n-checkbox v-model:checked="saveDetails">
@@ -84,7 +84,7 @@
                                     Cash on delivery
                                 </n-checkbox>
 
-                                <n-button round class="mt-4" size="large" color="#f17315" style="width: 200px;">
+                                <n-button  class="mt-4" size="large" color="#f17315" style="width: 200px;">
                                      Place order
                                  </n-button>
 

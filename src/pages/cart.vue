@@ -46,7 +46,7 @@
                       </td>
                       <td>{{ (item.price * item.quantity).toFixed(2) }}</td>
                       <td>
-                        <n-button round  size="small" type="error" @click="confirmDelete(item)">Delete</n-button>
+                        <n-button  size="small" type="error" @click="confirmDelete(item)">Delete</n-button>
                       </td>
                     </tr>
                   </tbody>
@@ -54,8 +54,8 @@
               </div>
 
               <div class="flex justify-between items-center">
-                <n-button round size="large" class="mt-4" type="tertiary" color="#000">Return to Home</n-button>
-                <n-button round size="large" class="mt-4"  color="#000">Update cart</n-button>
+                <n-button size="large" class="mt-4" type="tertiary" color="#000">Return to Home</n-button>
+                <n-button size="large" class="mt-4"  color="#000">Update cart</n-button>
               </div>
   
               <div class="w-full flex md:justify-end mt-6">
@@ -81,7 +81,7 @@
                           <span><b>€{{ totalPrice.toFixed(2) }}</b></span>
                         </n-flex>
                         <n-button 
-                         round size="large" class="mt-4" color="#f17315" block @click="checkout">Proceed to Checkout</n-button>
+                         size="large" class="mt-4" color="#f17315" block @click="checkout">Proceed to Checkout</n-button>
                       </div>
           
                 </div>
