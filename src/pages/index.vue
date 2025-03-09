@@ -23,12 +23,14 @@
                 <!-- Carousel Section -->
                 <div class="md:col-span-4   md:my-10 md:mx-5 relative order-2 md:order-2">
                     <div class="carousel-container">
-                        <n-carousel autoplay>
+                        <n-carousel autoplay class="flex gap-x-2">
                             <img
                                 v-for="(image, index) in carouselImages"
+                                width="100"
                                 :key="index"
                                 class="carousel-img"
                                 :src="image"
+                                style="margin: 0 1px;"
                             >
                         </n-carousel>
                         <!-- Fix the indicator position -->
@@ -90,10 +92,12 @@ const categories = [
 
 // Define carousel images
 const carouselImages = [
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg",
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg",
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg",
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+   
+    "/carousel/c10.jpg",
+    "/carousel/c20.jpg",
+    "/carousel/c30.jpg",
+    "/carousel/c40.jpg",
+    "/carousel/c50.jpg",
 ];
 
 // Function to handle subcategory click

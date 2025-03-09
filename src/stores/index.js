@@ -67,8 +67,8 @@ export const useStore = defineStore('Shop', () => {
   const clearUser =()=>{
     state = {
       user:null,
-      current_page:'home',
-      selectedNavMenu:'home',
+      current_page:'account',
+      selectedNavMenu:'account',
     };
 
   }

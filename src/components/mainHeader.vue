@@ -39,7 +39,7 @@
           <!-- Icons & Search (Desktop Only) -->
           <div class="flex items-center mt-4 md:mt-0 gap-4" 
           :class="path === '/account/create' || path === '/account' || path=== '/account/recover-password'? 'hidden':''">
-            <n-input size="large" round placeholder="Search for items ...">
+            <n-input size="large" placeholder="Search for items ...">
               <template #suffix>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" 
