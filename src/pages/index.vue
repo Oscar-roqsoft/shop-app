@@ -76,6 +76,10 @@
 
 <script setup>
 import { NCollapse, NCollapseItem, NCarousel,NCard } from 'naive-ui';
+import { get_all_product} from '@/composables/actions';
+import { useStore } from "@/stores";
+
+const pinia = useStore()
 
 // Define categories with collapsible subcategories
 const categories = [
@@ -104,6 +108,16 @@ const carouselImages = [
 const handleClick = (subcategory) => {
     console.log("Clicked on:", subcategory);
 };
+
+
+onMounted(async()=>{
+
+    if(!pinia.state.products.length){
+        return await get_all_product(1)
+    }else{
+       
+    }
+})
 </script>
 
 <style scoped>

@@ -15,6 +15,23 @@
 
 <script setup>
 import { NNotificationProvider,NConfigProvider } from 'naive-ui'
+import { useStore } from "@/stores";
+
+const pinia = useStore()
+
+const route = useRouter()
+
+const path = ref(route.currentRoute.value.path)
+
+
+// watch(()=>path.value,(newv)=>{
+
+//     console.log(newv)
+
+//     if (newv === '/wishlist' || newv ===  '/cart'|| newv === '/order') {
+//         pinia.state.selectedNavMenu = '';
+//     }
+// })
 
 const themeOverrides = {
       common: {

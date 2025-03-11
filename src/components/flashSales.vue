@@ -1,6 +1,6 @@
 <template>
 
-    <div class="md:max-w-[1200px] mx-auto w-full h-full px-4 py-20 md:px-0 text-white">
+    <div v-if="paginatedProducts" class="md:max-w-[1200px] mx-auto w-full h-full px-4 py-20 md:px-0 text-white">
 
         <!-- <TagHeader /> -->
 
@@ -19,6 +19,32 @@
 
     </div>
 
+    <div v-else class="flex flex-col items-center justify-center h-[400px] text-center text-gray-700">
+    <!-- Inline SVG Icon -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      class="w-24 h-24 mb-4 text-gray-400"
+    >
+      <!-- Replace the path data below with your SVG content -->
+      <path
+        fill="#f17315"
+        d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V17a1 1 0 0 1-2 0v-.07a8 8 0 1 1 2 0zM12 4a8 8 0 0 1 7.93 7H16a1 1 0 0 0 0 2h3.93A8 8 0 0 1 12 20a8 8 0 0 1-7.93-7H8a1 1 0 0 0 0-2H4.07A8 8 0 0 1 12 4z"
+      />
+    </svg>
+    <h2 class="mb-2 text-2xl font-semibold">No Products Available</h2>
+    <p class="mb-4 text-gray-500">
+      We couldn't find any products at the moment. Please check back later or explore other categories.
+    </p>
+
+    <n-button
+      class="px-4 py-2 text-white"
+      color="#f17315"
+    >
+      Return to Home
+</n-button>
+  </div>
+
 
     
 </template>
@@ -29,8 +55,11 @@ import { ref, computed, watch, nextTick, onMounted } from "vue";
 import { NCard, NRate, NButton, NPagination } from "naive-ui";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useStore } from "@/stores";
 
-// gsap.registerPlugin(ScrollTrigger);
+const pinia = useStore()
+
+console.log('PRDUCTS:',pinia.state.products.products)
 
 
 const productNames = [
@@ -61,7 +90,11 @@ const productImages = [
     // "https://source.unsplash.com/300x200/?appliance"
 ];
 
+
+
+
 // Generate random products
+
 const generateRandomProducts = () => {
     return productNames.map((name, index) => ({
         name,
@@ -74,7 +107,11 @@ const generateRandomProducts = () => {
     }));
 };
 
-const products = ref(generateRandomProducts());
+const products = ref(pinia.state.products.products);
+// const products = computed(()=>{
+//     return pinia.state.products.products
+// })
+
 const productCards = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = 4;

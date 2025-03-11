@@ -1,37 +1,4 @@
 
-// import { defineStore } from 'pinia'
-
-// import { createPinia } from 'pinia'
-// import  piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
-
-
-
-
-// export const useStore = defineStore('BelugarStore', () => {
-//     const state = {
-//       selectedNavMenu:'home',
-//       pricingPlans:[],
-
-
-//     }
-
-//     const setpricingPlans = (payload)=>{
-//       state.pricingPlans = payload
-//     }
-
-//     return { state,setpricingPlans }
-//   }, 
-//   {persist: {
-//     storage: piniaPluginPersistedstate.localStorage,
-//   }},
-// )
-
-
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useStore, import.meta.hot))
-// }
-
 
 import { defineStore } from 'pinia'
 
@@ -39,7 +6,8 @@ export const useStore = defineStore('Shop', () => {
 
   const state = reactive({
     user:null,
-    testimonial:[],
+    isAuthenticated:false,
+    products:[],
     current_page:'home',
     selectedNavMenu:'home',
   });
@@ -48,8 +16,9 @@ export const useStore = defineStore('Shop', () => {
         state.user = payload
         console.log(payload)
     }
-    const setTestimonial = (payload)=>{
-        state.testimonial = payload
+
+    const setProducts = (payload)=>{
+        state.products = payload
     }
 
     const setpricingPlans = (payload)=>{
@@ -67,6 +36,7 @@ export const useStore = defineStore('Shop', () => {
   const clearUser =()=>{
     state = {
       user:null,
+      isAuthenticated:false,
       current_page:'account',
       selectedNavMenu:'account',
     };
@@ -75,6 +45,7 @@ export const useStore = defineStore('Shop', () => {
 
   return {
     setUser,
+    setProducts,
     state,
     clearUser
     

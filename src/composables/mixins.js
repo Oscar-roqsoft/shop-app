@@ -32,3 +32,51 @@ export function useNotify() {
 
   return { notify, info, success, warning, error };
 }
+
+
+
+
+export const numberWithCommas = (number) =>{
+    // Convert the number to a string
+    let numStr = `${number}`;
+  
+    // Split the string into integer and fractional parts
+    let [integerPart, fractionalPart] = numStr.split('.');
+  
+    // Use a regular expression to add commas to the integer part
+    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+    // Reconstruct the number with the modified integer part and the original fractional part
+    return fractionalPart ? `${integerPart}.${fractionalPart}` : integerPart;
+  }
+  
+  export const getUserId = ()=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    return userId
+  }
+  
+  
+  
+  
+  //uploading to cloudinary
+  export const asyncRequest = async (url, options, json = true) => {
+     const pinia = useStore();
+    return fetch(url, options)
+    .then(response => {
+      const statusCode = response.status;
+      if(statusCode == 401){
+        // if(pinia.currentNavMenu === 'home') return  pinia.state.isAuthenticated = false
+        navigateTo("/login");
+        return;
+      }
+      return json ? response.json() : response.text();
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      return error;
+    });
+  };
+  

@@ -27,8 +27,9 @@
                   class="capitalize"
                   @click="navigateToPath(i.href, i.label)"
                   color="default"
+                  :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'"
                  >
-                  <span  :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'">
+                  <span  >
                     {{ i.label }}
                   </span>
                 </n-button>
@@ -49,7 +50,7 @@
             </n-input>
 
             <n-badge  processing :value="value">
-              <n-button @click="navigateTo('/wishlist')" strong secondary circle size="large">
+              <n-button @click=" pinia.state.isAuthenticated ? navigateTo('/wishlist') : logout()" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 48 48">
@@ -63,7 +64,7 @@
 
 
             <n-badge  processing :value="value" >
-              <n-button @click="navigateTo('/cart')" strong secondary circle size="large">
+              <n-button @click="pinia.state.isAuthenticated ?  navigateTo('/cart'): logout()" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59l-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2zM6.16 6h12.15l-2.76 5H8.53zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2s-.9-2-2-2m10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2s2-.9 2-2s-.9-2-2-2"/></svg>
@@ -110,10 +111,9 @@
                   <li 
                     @click="navigateToPath(i.href, i.label), toggleMenu" 
                     class="py-3 w-full capitalize text-left px-4 cursor-pointer hover:text-orange-500"
+                     :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'"
                      >
-                     <span  :class="pinia.state.selectedNavMenu === i.label ? 'text-[#f17315_!important]' : 'text-[black_!important]'">
                     {{ i.label }}
-                  </span>
                   </li>
               </n-button>
           </ul>
@@ -160,7 +160,7 @@
     { label: 'home', href: '/' },
     { label: 'contact', href: '/contact' },
     { label: 'about', href: '/about' },
-    { label: 'sign up', href: '/account' },
+    { label:  !pinia.state.isAuthenticated ? `sign up` :`sign out`, href: '/account' },
   ]
   
   const mobileMenu = ref(null)
@@ -199,19 +199,26 @@
 const handleSelect = (key => {
   switch (key) {
     case 'profile':
-      navigateTo('/account/update')
+       pinia.state.isAuthenticated ?  navigateTo('/account/update') : logout();
       break
     case 'order':
-      navigateTo('/order')
+       pinia.state.isAuthenticated ? navigateTo('/order') :  logout()
       break
     case 'logout':
        pinia.clearUser
-       navigateTo('/account')
+       logout()
       break
     default:
     console.log('Unknown action')
   }
 })
+
+
+const logout = ()=>{
+  pinia.state.selectedNavMenu = 'sign up';
+  navigateTo('/account')
+
+}
 
 // Dropdown options with custom SVG icons
 const options = [
@@ -226,7 +233,7 @@ const options = [
     icon: renderIcon('M21.7 7.3l-5-5c-.4-.4-1-.4-1.4 0l-11 11c-.2.2-.3.4-.3.7v5c0 .6.4 1 1 1h5c.3 0 .5-.1.7-.3l11-11c.4-.4.4-1 0-1.4zM7 18H5v-2l10-10 2 2-10 10zm12-12l-2-2 1.3-1.3 2 2L19 6z')
   },
   {
-    label: 'Logout',
+    label: pinia.state.isAuthenticated ? 'Logout': 'Login',
     key: 'logout',
     icon: renderIcon('M10.09 15.59L8.67 17l-5-5 5-5 1.41 1.41L6.83 11H16v2H6.83l3.26 3.29z M20 3H10c-1.1 0-2 .9-2 2v4h2V5h10v14H10v-4H8v4c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z')
   }

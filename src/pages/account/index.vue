@@ -125,6 +125,7 @@
         if(data.success){
           pinia.setUser(data.data)
           notify('success', 'Successfully logged in')
+          pinia.state.isAuthenticated = true
           navigateTo('/')
         }else{
           notify('error', data.message)

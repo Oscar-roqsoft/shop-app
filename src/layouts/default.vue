@@ -12,10 +12,8 @@
 
 <script setup>
 
-const route = useRouter()
 
-const path = route.currentRoute.value.path
 
-console.log(path)
+
 
 </script>
