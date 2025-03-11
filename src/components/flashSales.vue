@@ -107,7 +107,7 @@ const generateRandomProducts = () => {
     }));
 };
 
-const products = ref(pinia.state.products.products);
+const products = ref(generateRandomProducts());
 // const products = computed(()=>{
 //     return pinia.state.products.products
 // })

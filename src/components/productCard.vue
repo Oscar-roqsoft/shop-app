@@ -7,7 +7,7 @@
         >
             <n-card :title="product.name" @click="navigateTo(`/product/${index}`)">
                 <template #cover>
-                    <img :src="product.images" class="w-full h-[250px] object-contain">
+                    <img :src="product.image" class="w-full h-[250px] object-contain">
                 </template>
 
                 <div class="flex justify-between items-center">
