@@ -3,7 +3,7 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  modules: ['nuxtjs-naive-ui', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt',],
+  modules: ['nuxtjs-naive-ui', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt',  '@vueuse/nuxt',],
  
   ssr:true,
   debug: true, // Enable debugging

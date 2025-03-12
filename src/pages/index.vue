@@ -6,8 +6,12 @@
                 <!-- Sidebar Category List -->
                 <ul class="hidden md:block col-span-1 gap-6 order-3 md:order-1 md:border-r pt-6  relative overflow-y-auto w-[100px]">
                     <h2 class=" font-bold text-[24px] mb-4 tracking-wider underline">Categories</h2>
-                    <li v-for="(category, index) in categories" :key="index" class="mb-4">
-                        <n-collapse v-if="category.subcategories" arrow-placement="right">
+                    <n-button quaternary strong
+                       class="mb-2"
+                        @click="selectedCategory = 'all'"
+                        :tertiary="selectedCategory === 'all'"> All items</n-button>
+                    <li v-for="(category, index) in categories" :key="index" class="mb-2">
+                        <!-- <n-collapse v-if="category.subcategories" arrow-placement="right">
                             <n-collapse-item :title="category.name" :name="category.name">
                                 <div v-for="(sub, subIndex) in category.subcategories" :key="subIndex">
                                     <button @click="handleClick(sub)" class="subcategory-btn">
@@ -15,8 +19,11 @@
                                     </button>
                                 </div>
                             </n-collapse-item>
-                        </n-collapse>
-                        <span v-else>{{ category.name }}</span>
+                        </n-collapse> -->
+
+                        <n-button quaternary strong
+                        @click="selectedCategory = category.name"
+                        :tertiary="category.name === selectedCategory">{{ category.name }}</n-button>
                     </li>
                 </ul>
 
@@ -75,11 +82,13 @@
 </template>
 
 <script setup>
-import { NCollapse, NCollapseItem, NCarousel,NCard } from 'naive-ui';
+import { NCollapse, NCollapseItem, NCarousel,NCard ,NButton} from 'naive-ui';
 import { get_all_product} from '@/composables/actions';
 import { useStore } from "@/stores";
 
 const pinia = useStore()
+
+const selectedCategory = ref('')
 
 // Define categories with collapsible subcategories
 const categories = [
@@ -112,11 +121,10 @@ const handleClick = (subcategory) => {
 
 onMounted(async()=>{
 
-    if(!pinia.state.products.length){
-        return await get_all_product(1)
-    }else{
+    if(pinia.state.products.length > 0) return
+    await get_all_product(1)
        
-    }
+    
 })
 </script>
 

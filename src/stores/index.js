@@ -7,7 +7,11 @@ export const useStore = defineStore('Shop', () => {
   const state = reactive({
     user:null,
     isAuthenticated:false,
+    isFetchingProduct:false,
     products:[],
+    filteredProducts:[],
+    likedProducts:[],
+    wishLists:[],
     current_page:'home',
     selectedNavMenu:'home',
   });
@@ -21,8 +25,8 @@ export const useStore = defineStore('Shop', () => {
         state.products = payload
     }
 
-    const setpricingPlans = (payload)=>{
-            state.pricingPlans = payload
+    const setWishLists = (payload)=>{
+        state.wishLists = payload
     }
   const setCountries = (payload) => {
     state.countries = payload
@@ -42,12 +46,19 @@ export const useStore = defineStore('Shop', () => {
     };
 
   }
+  const updateData =()=>{
+    state.products =[]
+  }
 
   return {
     setUser,
     setProducts,
     state,
-    clearUser
+    clearUser,
+    setWishLists,
+    updateData
+    
+
     
   }
 

@@ -33,6 +33,10 @@ const path = ref(route.currentRoute.value.path)
 //     }
 // })
 
+onMounted(()=>{
+  pinia.updateData()
+})
+
 const themeOverrides = {
       common: {
         primaryColor: '#f17315',      // Orange for primary

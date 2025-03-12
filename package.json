@@ -9,7 +9,6 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  
   "dependencies": {
     "@google-translate-select/vue3": "^0.1.8",
     "@pinia/nuxt": "^0.5.1",
@@ -24,9 +23,10 @@
     "vue-router": "latest",
     "vue-virtual-scroller": "^2.0.0-beta.8"
   },
-
   "devDependencies": {
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
+    "@vueuse/core": "^13.0.0",
+    "@vueuse/nuxt": "^13.0.0",
     "autoprefixer": "^10.4.20",
     "naive-ui": "^2.39.0",
     "postcss": "^8.4.45",

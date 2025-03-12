@@ -1,24 +1,29 @@
 <template>
     <div class="border-b fixed top-0 left-0 z-50 bg-[#F4F7FA] w-full">
       <div class="md:max-w-[1200px] mx-auto w-full h-full px-4 md:px-0">
-        <div class="flex flex-wrap justify-between items-center py-5">
+        <div class="flex flex-col md:flex-row justify-between items-center py-5  w-full">
           <!-- Logo -->
-          <div class="w-[50px]">
-            <span class="text-[30px] font-bold">Exclusive</span>
-            <!-- <img class="w-full" src="/logo/logo1.jpg" alt=""> -->
-          </div>
+           <div class="flex justify-between items-center w-full md:w-[50%]">
 
-           <!-- Mobile Menu Button -->
-           <div class="md:hidden">
-            <button @click="toggleMenu" class="text-2xl focus:outline-none md:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-              </svg>
-            </button>
-          </div>
+             <div class="">
+               <span class="text-[30px] font-bold">Exclusive</span>
+               <!-- <img class="w-full" src="/logo/logo1.jpg" alt=""> -->
+             </div>
+   
+              <!-- Mobile Menu Button -->
+              <div class="block md:hidden">
+               <button @click="toggleMenu" class="text-2xl focus:outline-none md:hidden">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                   <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+                 </svg>
+               </button>
+             </div>
+
+           </div>
   
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center gap-6 cursor-pointer" >
+          <div class="hidden md:flex items-center gap-6 cursor-pointer" 
+          :class="path === '/account/create' || path === '/account' || path=== '/account/recover-password'? '':'w-full'">
             <ul v-for="(i, index) in navItems" :key="index">
               <li>
                 <n-button 
@@ -38,18 +43,20 @@
           </div>
   
           <!-- Icons & Search (Desktop Only) -->
-          <div class="flex items-center mt-4 md:mt-0 gap-4" 
+          <div class="flex  items-center mt-4 md:mt-0 gap-4 w-full" 
           :class="path === '/account/create' || path === '/account' || path=== '/account/recover-password'? 'hidden':''">
-            <n-input size="large" placeholder="Search for items ...">
-              <template #suffix>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <n-input v-model:value="searchQuery" size="large" placeholder="Search for items ..."  
+            :loading="isSearching">
+              <template  #suffix>
+                <svg v-if="!isSearching" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" 
                   d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/>
                 </svg>
               </template>
             </n-input>
 
-            <n-badge  processing :value="value">
+
+            <n-badge  processing :value="wishlistValue">
               <n-button @click=" pinia.state.isAuthenticated ? navigateTo('/wishlist') : logout()" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
@@ -63,7 +70,7 @@
             </n-badge>
 
 
-            <n-badge  processing :value="value" >
+            <n-badge  processing :value="cartvalue" >
               <n-button @click="pinia.state.isAuthenticated ?  navigateTo('/cart'): logout()" strong secondary circle size="large">
                 <template #icon>
                   <n-icon>
@@ -135,6 +142,44 @@
   import gsap from 'gsap'
   import { NButton, NInput, NIcon, NBadge,NDropdown } from 'naive-ui'
   import { useStore } from '@/stores/index'
+  import { refDebounced } from '@vueuse/core'
+
+
+  const pinia = useStore()
+ 
+
+  const isSearching = ref(false)
+
+  const searchQuery = ref('')
+
+    // Debounced search query
+  const debounced = refDebounced(searchQuery,1000);
+
+  watch(()=>searchQuery.value,(newv)=>{
+    if(newv && newv !== ''){
+      isSearching.value = true
+    }else{
+      isSearching.value = false
+    }
+  })
+
+  
+
+  watch(()=>debounced.value,(newv)=>{
+    if(newv){
+      isSearching.value = false
+      const query = debounced.value.trim().toLowerCase()
+      console.log('nice',debounced.value)
+      pinia.state.filteredProducts = pinia.state.products?.products?.filter(product =>
+      product.name.toLowerCase().includes(query))
+     
+    }else{
+      pinia.state.filteredProducts = []
+    }
+
+  })
+
+ 
 
 
 
@@ -154,8 +199,12 @@
   console.log(path)
 
   
-  const pinia = useStore()
-  const value = ref(2)
+  const cartvalue = ref(0)
+
+  const wishlistValue = computed(()=>{
+    return pinia.state.likedProducts.length
+  })
+
   const navItems = [
     { label: 'home', href: '/' },
     { label: 'contact', href: '/contact' },
