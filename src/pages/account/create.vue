@@ -119,6 +119,8 @@
 
 
     </div>
+
+    <MainFooter/>
     
   </template>
 

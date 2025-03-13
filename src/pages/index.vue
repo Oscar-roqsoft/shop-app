@@ -6,25 +6,36 @@
                 <!-- Sidebar Category List -->
                 <ul class="hidden md:block col-span-1 gap-6 order-3 md:order-1 md:border-r pt-6  relative overflow-y-auto w-[100px]">
                     <h2 class=" font-bold text-[24px] mb-4 tracking-wider underline">Categories</h2>
-                    <n-button quaternary strong
-                       class="mb-2"
-                        @click="selectedCategory = 'all'"
-                        :tertiary="selectedCategory === 'all'"> All items</n-button>
-                    <li v-for="(category, index) in categories" :key="index" class="mb-2">
-                        <!-- <n-collapse v-if="category.subcategories" arrow-placement="right">
-                            <n-collapse-item :title="category.name" :name="category.name">
-                                <div v-for="(sub, subIndex) in category.subcategories" :key="subIndex">
-                                    <button @click="handleClick(sub)" class="subcategory-btn">
-                                        {{ sub }}
-                                    </button>
-                                </div>
-                            </n-collapse-item>
-                        </n-collapse> -->
+                    <div v-if="!pinia.state.isFetchingCategories">
 
-                        <n-button quaternary strong
-                        @click="selectedCategory = category.name"
-                        :tertiary="category.name === selectedCategory">{{ category.name }}</n-button>
-                    </li>
+                           <n-button quaternary strong
+                           class="mb-2"
+                            @click="filterproduct('all')"
+                            :tertiary="selectedCategory === 'all'"> All items</n-button>
+    
+                            <li v-for="(category, index) in pinia.state.categories" :key="index" class="mb-2">
+                            <!-- <n-collapse v-if="category.subcategories" arrow-placement="right">
+                                <n-collapse-item :title="category.name" :name="category.name">
+                                    <div v-for="(sub, subIndex) in category.subcategories" :key="subIndex">
+                                        <button @click="handleClick(sub)" class="subcategory-btn">
+                                            {{ sub }}
+                                        </button>
+                                    </div>
+                                </n-collapse-item>
+                            </n-collapse> -->
+    
+                            <n-button quaternary strong
+                            class=" capitalize"
+                            @click="filterproduct(category.name)"
+                            :tertiary="category.name === selectedCategory">{{ category.name }}</n-button>
+                        </li>
+                    </div>
+
+                    <div v-else>
+                        <li  v-for="n in 6" :key="n" class="mb-2">
+                            <n-skeleton height="32px" width="120px" :sharp="false" />
+                        </li>
+                    </div>
                 </ul>
 
                 <!-- Carousel Section -->
@@ -74,21 +85,37 @@
         <!-- end of hero section -->
 
         <!-- flash sales section -->
-        <section>
+        <section class="relative">
              <FlashSales/>
         </section>
+
+        <MainFooter/>
+
 
     </main>
 </template>
 
 <script setup>
-import { NCollapse, NCollapseItem, NCarousel,NCard ,NButton} from 'naive-ui';
-import { get_all_product} from '@/composables/actions';
+import { NCollapse, NCollapseItem, NCarousel,NCard ,NButton,NSkeleton} from 'naive-ui';
+import { get_all_product,get_all_categories} from '@/composables/actions';
 import { useStore } from "@/stores";
 
 const pinia = useStore()
 
-const selectedCategory = ref('')
+const selectedCategory = ref('all')
+
+
+ const filterproduct = (categoryName)=>{
+    selectedCategory.value = categoryName
+    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products.products
+    pinia.state.filteredProducts = pinia.state.products?.products?.filter(product => product.category === selectedCategory.value)
+ }
+
+
+  onMounted(()=>{
+    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products.products
+  })
+    
 
 // Define categories with collapsible subcategories
 const categories = [
@@ -120,10 +147,14 @@ const handleClick = (subcategory) => {
 
 
 onMounted(async()=>{
-
-    if(pinia.state.products.length > 0) return
+    if(pinia.state?.products.length) return
     await get_all_product(1)
-       
+    
+})
+
+onMounted(async()=>{
+    if(pinia.state?.categories) return
+    await get_all_categories()
     
 })
 </script>

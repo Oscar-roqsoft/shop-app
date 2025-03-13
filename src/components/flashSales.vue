@@ -1,5 +1,6 @@
 <template>
 
+
     <div v-if="paginatedProducts" class="md:max-w-[1200px] mx-auto w-full h-full px-4 py-20 md:px-0 text-white">
 
         <!-- <TagHeader /> -->
@@ -55,7 +56,7 @@ import { useStore } from "@/stores";
 
 const pinia = useStore()
 
-console.log('PRDUCTS:',pinia.state.products.products)
+// console.log('PRDUCTS:',pinia.state.products.products)
 
 
 const productNames = [
@@ -105,7 +106,7 @@ const generateRandomProducts = () => {
 
 // const products = ref(pinia.state.products.products);
 const products = computed(()=>{
-    const items = pinia.state.filteredProducts.length ? pinia.state.filteredProducts : pinia.state.products.products
+    const items = pinia.state.filteredProducts  ? pinia.state.filteredProducts : pinia.state.products.products
     return items
 })
 

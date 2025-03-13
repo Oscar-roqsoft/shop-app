@@ -8,8 +8,10 @@ export const useStore = defineStore('Shop', () => {
     user:null,
     isAuthenticated:false,
     isFetchingProduct:false,
+    isFetchingCategories:false,
     products:[],
-    filteredProducts:[],
+    categories:[],
+    filteredProducts:null,
     likedProducts:[],
     wishLists:[],
     current_page:'home',
@@ -23,6 +25,9 @@ export const useStore = defineStore('Shop', () => {
 
     const setProducts = (payload)=>{
         state.products = payload
+    }
+    const setCategories = (payload)=>{
+        state.categories = payload
     }
 
     const setWishLists = (payload)=>{
@@ -56,7 +61,8 @@ export const useStore = defineStore('Shop', () => {
     state,
     clearUser,
     setWishLists,
-    updateData
+    updateData,
+    setCategories
     
 
     

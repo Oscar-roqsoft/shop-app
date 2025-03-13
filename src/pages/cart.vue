@@ -107,6 +107,8 @@
         </n-card>
       </n-modal>
     </div>
+
+    <MainFooter/>
   </template>
   
   <script setup>

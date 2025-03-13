@@ -1,11 +1,13 @@
 
 <template>
-    <div class="bg-[#F4F7FA] min-h-full w-screen">
+    <div class="bg-[#F4F7FA] min-h-screen w-screen">
         
         <MainHeader/>
-        <slot/>
 
-        <MainFooter/>
+        <slot>
+
+        </slot>
+
     </div>
 </template>
 

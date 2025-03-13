@@ -100,6 +100,8 @@
             </div>
         </div>
     </div>
+
+    <MainFooter/>
 </template>
 
 <script setup>

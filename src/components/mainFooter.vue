@@ -1,6 +1,6 @@
 <template>
     
-    <div class="bg-[#030406]">
+    <div class="bg-[#030406] relative">
 
         <div class="md:max-w-[1200px] mx-auto w-full h-full px-4 py-20 md:px-0 text-white">
 
