@@ -56,7 +56,7 @@ import { useStore } from "@/stores";
 
 const pinia = useStore()
 
-// console.log('PRDUCTS:',pinia.state.products.products)
+// console.log('PRDUCTS:',pinia.state.products)
 
 
 const productNames = [
@@ -104,9 +104,9 @@ const generateRandomProducts = () => {
     }));
 };
 
-// const products = ref(pinia.state.products.products);
+// const products = ref(pinia.state.products);
 const products = computed(()=>{
-    const items = pinia.state.filteredProducts  ? pinia.state.filteredProducts : pinia.state.products.products
+    const items = pinia.state.filteredProducts  ? pinia.state.filteredProducts : pinia.state.products
     return items
 })
 

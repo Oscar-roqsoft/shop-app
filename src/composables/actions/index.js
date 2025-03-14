@@ -12,7 +12,7 @@ export const  get_all_product = async (pageNumber) => {
     try {
       const data = await getAllProduct(pageNumber);
       if (data.success) {
-        const result = data.data;
+        const result = data.data.products;
         pinia.setProducts(result);
       }
       pinia.state.isFetchingProduct = false

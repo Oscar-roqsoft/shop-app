@@ -170,7 +170,7 @@
       isSearching.value = false
       const query = debounced.value.trim().toLowerCase()
       console.log('nice',debounced.value)
-      pinia.state.filteredProducts = pinia.state.products?.products?.filter(product =>
+      pinia.state.filteredProducts = pinia.state.products.filter(product =>
       product.name.toLowerCase().includes(query))
      
     }else{
@@ -199,7 +199,9 @@
   console.log(path)
 
   
-  const cartvalue = ref(0)
+  const cartvalue = computed(()=>{
+    return pinia.state.cart.length
+  })
 
   const wishlistValue = computed(()=>{
     return pinia.state.likedProducts.length

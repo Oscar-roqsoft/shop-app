@@ -10,6 +10,7 @@ export const useStore = defineStore('Shop', () => {
     isFetchingProduct:false,
     isFetchingCategories:false,
     products:[],
+    cart:[],
     categories:[],
     filteredProducts:null,
     likedProducts:[],

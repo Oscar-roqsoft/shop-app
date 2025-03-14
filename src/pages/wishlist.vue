@@ -67,7 +67,7 @@
                    <tag-header text="Related Item"/>
    
                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10">
-                       <ProductCard :products="pinia.state.products.products"/>
+                       <ProductCard :products="pinia.state.products"/>
                    </div>
    
                </div> -->

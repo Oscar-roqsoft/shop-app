@@ -121,7 +121,7 @@
 
                 <tag-header text="Related Item" class="mb-10"/>
 
-                <ProductCard :products="pinia.state.products.products"/>
+                <ProductCard :products="pinia.state.products"/>
 
             </div>
         </div>
@@ -145,7 +145,7 @@ const lastSegment = ref(route.params.id )
 
 
 
-const myproduct = ref(pinia.state.products?.products?.find(product => product._id === lastSegment.value))
+const myproduct = ref(pinia.state.products?.find(product => product._id === lastSegment.value))
 
 
 const value = ref(myproduct.value?.rating);
@@ -156,7 +156,7 @@ const toggleLike = (productId) => {
       pinia.state.likedProducts = pinia.state.likedProducts.filter(id => id !== productId);
       pinia.state.wishLists = pinia.state.wishLists?.filter(product => product._id !==   productId);
     } else {
-        const filteredProduct = pinia.state.products?.products?.filter(product => product._id === productId);
+        const filteredProduct = pinia.state.products?.filter(product => product._id === productId);
       pinia.state.likedProducts.unshift(productId);
       pinia.setWishLists([...pinia.state.wishLists,...filteredProduct]);
     }

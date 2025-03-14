@@ -107,13 +107,13 @@ const selectedCategory = ref('all')
 
  const filterproduct = (categoryName)=>{
     selectedCategory.value = categoryName
-    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products.products
-    pinia.state.filteredProducts = pinia.state.products?.products?.filter(product => product.category === selectedCategory.value)
+    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products
+    pinia.state.filteredProducts = pinia.state.products.filter(product => product.category === selectedCategory.value)
  }
 
 
   onMounted(()=>{
-    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products.products
+    if(selectedCategory.value === 'all') return pinia.state.filteredProducts = pinia.state.products
   })
     
 
@@ -147,13 +147,13 @@ const handleClick = (subcategory) => {
 
 
 onMounted(async()=>{
-    if(pinia.state?.products.length) return
+    if(pinia.state.products.length) return
     await get_all_product(1)
     
 })
 
 onMounted(async()=>{
-    if(pinia.state?.categories) return
+    if(pinia.state?.categories.length) return
     await get_all_categories()
     
 })
