@@ -19,7 +19,7 @@
           </div>
   
           <!-- Animated Image -->
-          <div ref="errorImage" class="bg-[url('/bg/404-error.png')] bg-cover rounded-md min-h-[300px]"></div>
+          <!-- <div ref="errorImage" class="bg-[url('/bg/404-error.png')] bg-cover rounded-md min-h-[300px]"></div> -->
         </div>
       </div>
     </div>
