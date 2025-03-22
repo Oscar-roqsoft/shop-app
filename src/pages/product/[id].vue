@@ -5,18 +5,17 @@
         <div class="md:max-w-[1200px] mx-auto w-full h-full px-4  md:px-0 text-white">
 
             <n-breadcrumb>
+
                 <n-breadcrumb-item>
                     <!-- <n-icon :component="MdCash" /> -->
                      Home
                 </n-breadcrumb-item>
+             
                 <n-breadcrumb-item>
                 <!-- <n-icon :component="MdCash" />  -->
-                 Gaming
+                  {{ myproduct?.name }}
                 </n-breadcrumb-item>
-                <n-breadcrumb-item>
-                <!-- <n-icon :component="MdCash" />  -->
-                  Category
-                </n-breadcrumb-item>
+
             </n-breadcrumb>
 
 
@@ -133,34 +132,31 @@
 </template>
 
 <script setup>
-import { NBreadcrumb,NBreadcrumbItem,NIcon,NImage,NRate,NButton,NFormItemGi,NInputNumber } from 'naive-ui'
-import { useStore } from "@/stores";
 
-  const pinia = useStore()
+    import { NBreadcrumb,NBreadcrumbItem,NIcon,NImage,NRate,NButton,NFormItemGi,NInputNumber } from 'naive-ui'
+    import { useStore } from "@/stores";
 
-const route = useRoute();
-const inputNumberValue = null;
-const lastSegment = ref(route.params.id )
+    const pinia = useStore()
 
+    const route = useRoute();
+    const inputNumberValue = null;
+    const lastSegment = ref(route.params.id )
 
+    const myproduct = ref(pinia.state.products?.find(product => product._id === lastSegment.value))
 
+    const value = ref(myproduct.value?.rating);
 
-const myproduct = ref(pinia.state.products?.find(product => product._id === lastSegment.value))
-
-
-const value = ref(myproduct.value?.rating);
-
-
-const toggleLike = (productId) => {
-    if (pinia.state.likedProducts.includes(productId)) {
-      pinia.state.likedProducts = pinia.state.likedProducts.filter(id => id !== productId);
-      pinia.state.wishLists = pinia.state.wishLists?.filter(product => product._id !==   productId);
-    } else {
-        const filteredProduct = pinia.state.products?.filter(product => product._id === productId);
-      pinia.state.likedProducts.unshift(productId);
-      pinia.setWishLists([...pinia.state.wishLists,...filteredProduct]);
-    }
-  };
+    const toggleLike = (productId) => {
+        
+        if (pinia.state.likedProducts.includes(productId)) {
+        pinia.state.likedProducts = pinia.state.likedProducts.filter(id => id !== productId);
+        pinia.state.wishLists = pinia.state.wishLists?.filter(product => product._id !==   productId);
+        } else {
+            const filteredProduct = pinia.state.products?.filter(product => product._id === productId);
+        pinia.state.likedProducts.unshift(productId);
+        pinia.setWishLists([...pinia.state.wishLists,...filteredProduct]);
+        }
+    };
 
 
 </script>

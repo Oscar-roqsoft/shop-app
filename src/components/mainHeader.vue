@@ -188,10 +188,6 @@
   const path = ref(route.currentRoute.value.path)
 
 
-  // if(){
-
-  // }
-
  watchEffect(()=>{
   path.value = route.currentRoute.value.path
  })

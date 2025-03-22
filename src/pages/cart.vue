@@ -28,23 +28,23 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in items" :key="item.id">
+                    <tr v-for="item in pinia.state.cart" :key="item.product?._id">
                       <td class="product-info">
-                        <n-image :src="item.image" width="50" height="50" />
+                        <n-image :src="item.product?.images" width="50" height="50" />
                         <div>
-                          <div class="text-muted">{{ item.category }}</div>
-                          <div>{{ item.name }}</div>
+                          <div class="text-muted">{{ item?.product?.category }}</div>
+                          <div>{{ item.product?.name }}</div>
                         </div>
                       </td>
-                      <td>{{ item.price.toFixed(2) }}</td>
+                      <td>{{ item.product?.price?.toFixed(2) }}</td>
                       <td>
                         <n-space>
                           <n-button size="small" @click="decreaseQuantity(item)">-</n-button>
-                          <span class="border px-2">{{ item.quantity }}</span>
+                          <span class="border px-2">{{ item?.quantity }}</span>
                           <n-button size="small" @click="increaseQuantity(item)">+</n-button>
                         </n-space>
                       </td>
-                      <td>{{ (item.price * item.quantity).toFixed(2) }}</td>
+                      <td>{{ (item.product?.price * item?.quantity).toFixed(2) }}</td>
                       <td>
                         <n-button  size="small" type="error" @click="confirmDelete(item)">Delete</n-button>
                       </td>
@@ -92,17 +92,22 @@
       </div>
   
       <!-- Delete Confirmation Modal -->
-      <n-modal v-model:show="showDeleteModal">
+      <n-modal v-model:show="pinia.state.showDeleteModal">
         <n-card
           title="Confirm Deletion"
           closable
           @close="showDeleteModal = false"
           style="width: 400px; max-width: 90vw"
         >
-          <p>Are you sure you want to remove <b>{{ itemToDelete?.name }}</b> from the cart?</p>
+          <p class="mb-8">Are you sure you want to remove <b>{{ itemToDelete?.name }}</b> from the cart?</p>
           <n-space justify="end">
-            <n-button @click="showDeleteModal = false">Cancel</n-button>
-            <n-button type="error" @click="removeItem">Delete</n-button>
+            <n-button @click="pinia.state.showDeleteModal = false">Cancel</n-button>
+            <n-button type="error" @click="removeItem">
+              <span class="mr-1">
+               Delete
+              </span>
+              <n-spin v-if="pinia.state.isRemovingFromCart" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+            </n-button>
           </n-space>
         </n-card>
       </n-modal>
@@ -123,8 +128,15 @@
     NButton,
     NModal,
     NFlex,
-    NDivider
+    NDivider,
+    NSpin
   } from 'naive-ui';
+
+  import { useStore } from '@/stores';
+
+  import { add_cart,remove_from_cart } from '@/composables/actions';
+  
+  const pinia = useStore();
   
   const items = ref([
     { id: 1, name: 'Cotton T-shirt', category: 'Shirt', price: 44, quantity: 1, image: 'https://i.imgur.com/1GrakTl.jpg' },
@@ -132,23 +144,28 @@
     { id: 3, name: 'Sneakers', category: 'Shoes', price: 99, quantity: 1, image: 'https://i.imgur.com/pHQ3xT3.jpg' }
   ]);
   
-  const totalPrice = computed(() => items.value.reduce((sum, item) => sum + item.price * item.quantity, 0));
+  const totalPrice = computed(() => pinia.state.cart.reduce((sum, item) => sum + item.product?.price * item.quantity, 0));
   
   const increaseQuantity = (item) => item.quantity++;
   const decreaseQuantity = (item) => item.quantity > 1 ? item.quantity-- : confirmDelete(item);
   
-  const showDeleteModal = ref(false);
+  const showDeleteModal = ref(pinia.state.showDeleteModal);
   const itemToDelete = ref(null);
   
+
   const confirmDelete = (item) => {
     itemToDelete.value = item;
-    showDeleteModal.value = true;
+    pinia.state.showDeleteModal = true;
   };
   
+
   const removeItem = () => {
-    items.value = items.value.filter(i => i.id !== itemToDelete.value.id);
-    showDeleteModal.value = false;
-    itemToDelete.value = null;
+    remove_from_cart(itemToDelete.value.product._id)
+    if(!pinia.state.isRemovingFromCart){
+      pinia.state.cart.filter(i => i.product._id !== itemToDelete.value.product._id);
+      pinia.state.showDeleteModal = false;
+      itemToDelete.value = null;
+    }
   };
   
   const checkout = () => navigateTo('/checkout');

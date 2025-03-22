@@ -67,7 +67,7 @@ export const numberWithCommas = (number) =>{
       const statusCode = response.status;
       if(statusCode == 401){
         // if(pinia.currentNavMenu === 'home') return  pinia.state.isAuthenticated = false
-        navigateTo("/login");
+        navigateTo("/account");
         return;
       }
       return json ? response.json() : response.text();
@@ -80,3 +80,15 @@ export const numberWithCommas = (number) =>{
     });
   };
   
+
+  export const filterDuplicatesById = (array, key = '_id') =>{
+    const seen = new Set();
+    return array.filter(item => {
+      const productId = item.product[key]; // Access the id inside the product object
+      if (seen.has(productId)) {
+        return false; // Skip if already seen
+      }
+      seen.add(productId);
+      return true; // Keep if first occurrence
+    });
+  }

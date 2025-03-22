@@ -51,7 +51,12 @@
               :color="isInCart(product._id) ? '#dc2626' : '#f17315'"
               style="width: 100%"
             >
+
               {{ isInCart(product._id) ? 'Remove from Cart' : 'Add to Cart' }}
+
+              <n-spin class="pl-1" v-if="pinia.state.isAddingToCart && !isInCart(product._id)" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+              <n-spin class="pl-1" v-if="pinia.state.isRemovingFromCart && isInCart(product._id)" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+
             </n-button>
           </div>
         </n-card>
@@ -81,10 +86,13 @@
   
   <script setup>
   import { ref, computed, watch, nextTick, onMounted } from 'vue';
-  import { NCard, NRate, NButton, NPagination } from 'naive-ui';
+  import { NCard, NRate, NButton, NPagination ,NSpin} from 'naive-ui';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { useStore } from '@/stores';
+
+  import { add_cart,remove_from_cart } from '@/composables/actions';
+
   
   const pinia = useStore();
   
@@ -103,20 +111,28 @@
   
   // Check if product is in cart
   const isInCart = (productId) => {
-    return pinia.state.cart.some(item => item._id === productId);
+    return pinia.state.cart?.some(item => item.product._id === productId);
   };
   
+
   // Toggle cart (add or remove)
-  const toggleCart = (productId) => {
+  const toggleCart = async(productId) => {
+    console.log(isInCart(productId))
     if (isInCart(productId)) {
       // Remove from cart
-      pinia.state.cart = pinia.state.cart.filter(item => item._id !== productId);
+      await remove_from_cart(productId)
+      // pinia.state.cart = pinia.state.cart?.filter(item => item.product._id !== productId);
     } else {
       // Add to cart
-      const productToAdd = pinia.state.products.find(p => p._id === productId);
-      if (productToAdd) {
-        pinia.state.cart.push(productToAdd);
+      const payload = {
+        productId
       }
+      add_cart(payload)
+
+      // const productToAdd = pinia.state.products.find(p => p._id === productId);
+      // if (productToAdd) {
+      //   pinia.state.cart.push({product:productToAdd,quantity:1});
+      // }
     }
   };
   

@@ -8,6 +8,11 @@ export const useStore = defineStore('Shop', () => {
     user:null,
     isAuthenticated:false,
     isFetchingProduct:false,
+    isFetchingCart:false,
+    isAddingToCart:false,
+    isUpdatingCart:false,
+    isRemovingFromCart:false,
+    showDeleteModal:false,
     isFetchingCategories:false,
     products:[],
     cart:[],
@@ -37,8 +42,8 @@ export const useStore = defineStore('Shop', () => {
   const setCountries = (payload) => {
     state.countries = payload
   }
-  const setFAQs = (payload) => {
-    state.FAQs = payload
+  const setCart = (payload) => {
+    state.cart = payload
   }
  
  
@@ -60,6 +65,7 @@ export const useStore = defineStore('Shop', () => {
     setUser,
     setProducts,
     state,
+    setCart,
     clearUser,
     setWishLists,
     updateData,

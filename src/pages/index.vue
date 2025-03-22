@@ -97,7 +97,7 @@
 
 <script setup>
 import { NCollapse, NCollapseItem, NCarousel,NCard ,NButton,NSkeleton} from 'naive-ui';
-import { get_all_product,get_all_categories} from '@/composables/actions';
+import { get_all_product,get_all_categories,get_all_cart} from '@/composables/actions';
 import { useStore } from "@/stores";
 
 const pinia = useStore()
@@ -147,14 +147,22 @@ const handleClick = (subcategory) => {
 
 
 onMounted(async()=>{
-    if(pinia.state.products.length) return
+    if(pinia.state.products.length) return pinia.state.products
     await get_all_product(1)
     
 })
 
+
 onMounted(async()=>{
     if(pinia.state?.categories.length) return
     await get_all_categories()
+    
+})
+
+
+onMounted(async()=>{
+    if(pinia.state?.cart.length) return
+    await get_all_cart()
     
 })
 </script>
@@ -199,7 +207,7 @@ ul {
 /* Styling for carousel images */
 .carousel-img {
     width: 100%;
-    height: 440px;
+    height: 350px;
     object-fit: cover;
     border-radius: 20px;
 }
@@ -207,5 +215,12 @@ ul {
   max-width: 100%;
   border-radius: 10px;
 }
+
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 240px;
+    }
+  }
+
 </style>
 
