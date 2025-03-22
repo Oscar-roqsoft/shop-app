@@ -37,7 +37,7 @@
 
                         </a></li> -->
                         <li><a href="mailto:contact.laboiserie@gmail.com" class="hover:text-gray-400">
-                            Address: 111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.
+                            Address: 111 Bijoy sarani, ojota,  DH 1515, Lagos.
                         </a></li>
                     </ul>
                     </nav>
@@ -108,7 +108,7 @@
                         <path d="M22.4414 12.333C22.4414 17.8558 17.9642 22.333 12.4414 22.333C6.91856 22.333 2.44141 17.8558 2.44141 12.333C2.44141 6.81016 6.91856 2.33301 12.4414 2.33301C17.9642 2.33301 22.4414 6.81016 22.4414 12.333Z" stroke="#fff" stroke-width="1.5"/>
                         <path d="M15.4414 14.333C15.4414 15.4376 14.546 16.333 13.4414 16.333H12.4414C11.5095 16.333 11.0436 16.333 10.676 16.1808C10.186 15.9778 9.79664 15.5884 9.59365 15.0984C9.44141 14.7308 9.44141 14.2649 9.44141 13.333V11.333C9.44141 10.4011 9.44141 9.93519 9.59365 9.56764C9.79664 9.07759 10.186 8.68824 10.676 8.48525C11.0436 8.33301 11.5095 8.33301 12.4414 8.33301H13.4414C14.546 8.33301 15.4414 9.22844 15.4414 10.333" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
-                    <p class=" ml-[4px]">Copyright Rimel 2025. All right reserved</p>
+                    <p class=" ml-[4px]">Copyright oscarTech 2025. All right reserved</p>
             </div> 
       
          </div>

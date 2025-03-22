@@ -17,7 +17,7 @@
   
               <!-- Scrollable Table for Cart Items -->
               <div class="w-full overflow-x-auto">
-                <n-table :bordered="false" class="min-w-[600px]">
+                <n-table :bordered="false" class="md:min-w-[600px] min-w-[700px]">
                   <thead>
                     <tr>
                       <th>Product</th>
