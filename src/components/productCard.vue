@@ -68,7 +68,7 @@
       <div
         v-for="n in 8"
         :key="n"
-        class="w-full max-w-xs p-4 border border-gray-200 rounded-lg shadow animate-pulse"
+        class="w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow animate-pulse"
       >
         <div class="w-full h-48 bg-gray-300 rounded"></div>
         <div class="mt-4 space-y-2">
