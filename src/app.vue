@@ -34,7 +34,7 @@ const path = ref(route.currentRoute.value.path)
 // })
 
 onMounted(()=>{
-  pinia.updateData()
+  // pinia.updateData()
 })
 
 const themeOverrides = {

@@ -11,7 +11,7 @@
             <div class="w-full">
               <div class="title mb-4">
                 <n-flex justify="space-between">
-                  <h4><b>Shopping Cart ({{ items.length }})</b></h4>
+                  <h4><b>Shopping Cart ({{ pinia.state.cart.length }})</b></h4>
                 </n-flex>
               </div>
   

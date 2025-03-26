@@ -10,7 +10,7 @@
                <!-- <img class="w-full" src="/logo/logo1.jpg" alt=""> -->
              </div>
    
-              <!-- Mobile Menu Button -->
+              <!-- Mobile Menu B  §utton -->
               <div class="block md:hidden">
                <button @click="toggleMenu" class="text-2xl focus:outline-none md:hidden">
                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">

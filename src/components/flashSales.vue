@@ -106,7 +106,7 @@ const generateRandomProducts = () => {
 
 // const products = ref(pinia.state.products);
 const products = computed(()=>{
-    const myArray =  pinia.state.filteredProducts?.myArray || []; // Default to an empty array if null
+    const myArray =  pinia.state.filteredProducts || []; // Default to an empty array if null
     const items = myArray.length ? pinia.state.filteredProducts : pinia.state.products
     return items
 })

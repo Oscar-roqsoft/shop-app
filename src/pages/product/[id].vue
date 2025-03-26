@@ -29,7 +29,7 @@
                             <n-image
                             width="100%"
                             style="border-radius: 10px !important;"
-                             :src="myproduct.images"
+                             :src="myproduct?.images"
                            />
 
                         </div>
@@ -39,7 +39,7 @@
                      style="max-width: 100%; max-height: 600px;">
                         <n-image
                             width="100%"
-                           :src="myproduct.images"
+                           :src="myproduct?.images[0]"
                         />
                     </div>
 
@@ -86,25 +86,33 @@
                         <div class="mt-4 flex flex-wrap gap-4">
                             <!-- <n-input-number v-model="inputNumberValue" /> -->
                             <div class="grid grid-cols-3 border rounded items-center min-w-[100px]">
-                                <n-button strong secondary size="large">
+                                <n-button :disabled="quantity == 1" @click="decrement" strong secondary size="large">
                                     -
                                 </n-button>
-                                <div class="flex justify-center items-center">3</div>
-                                <n-button color="#f17315" size="large">
+                                <div class="flex justify-center items-center">{{quantity}}</div>
+                                <n-button @click="increment" color="#f17315" size="large">
                                     +
                                 </n-button>
                                  
                              </div>
                              
-                            <n-button size="large" color="#f17315" style="width: 140px;">
-                                Add to cart
+                            <n-button size="large" 
+                            @click="toggleCart"
+                            :color="isInCart() ? '#dc2626' : '#f17315'" 
+                            style="width: 140px; ">
+                               <span class=" text-xs">
+                                {{ isInCart() ? 'Remove from Cart' : 'Add to Cart' }}
+                               </span> 
+                                <n-spin class="pl-1" v-if="pinia.state.isAddingToCart && !isInCart()" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+                                <n-spin class="pl-1" v-if="pinia.state.isRemovingFromCart && isInCart()" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+
                             </n-button>
 
-                            <n-button @click.stop="toggleLike(myproduct?._id)"
+                            <n-button @click="toggleLike(myproduct?._id)"
                             quaternary strong secondary size="large">
                                 <template #icon>
                                     <svg 
-                                    :class="{'text-red-500':  pinia.state.likedProducts.includes(myproduct._id), 'text-gray-400': ! pinia.state.likedProducts.includes(myproduct._id)}"
+                                    :class="{'text-red-500':  pinia.state.likedProducts.includes(myproduct?._id), 'text-gray-400': ! pinia.state.likedProducts.includes(myproduct?._id)}"
                                     xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from All by undefined - undefined --><path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>
                                 </template>
                             </n-button>
@@ -133,8 +141,10 @@
 
 <script setup>
 
-    import { NBreadcrumb,NBreadcrumbItem,NIcon,NImage,NRate,NButton,NFormItemGi,NInputNumber } from 'naive-ui'
+    import { NBreadcrumb,NBreadcrumbItem,NIcon,NImage,NRate,NButton,NFormItemGi,NInputNumber,NSpin } from 'naive-ui'
     import { useStore } from "@/stores";
+
+    import { add_cart,remove_from_cart } from '@/composables/actions';
 
     const pinia = useStore()
 
@@ -146,8 +156,19 @@
 
     const value = ref(myproduct.value?.rating);
 
+    const quantity = ref(1);
+
+    const increment = ()=>{
+        quantity.value++
+    }
+    const decrement = ()=>{
+        if(quantity.value > 1 ){
+            quantity.value--
+        }
+    }
+
     const toggleLike = (productId) => {
-        
+
         if (pinia.state.likedProducts.includes(productId)) {
         pinia.state.likedProducts = pinia.state.likedProducts.filter(id => id !== productId);
         pinia.state.wishLists = pinia.state.wishLists?.filter(product => product._id !==   productId);
@@ -158,5 +179,41 @@
         }
     };
 
+
+
+
+  const isInCart = () => {
+    return pinia.state.cart?.some(item => item.product._id === lastSegment.value);
+  };
+  
+
+  // Toggle cart (add or remove)
+  const toggleCart = async() => {
+    if (isInCart()) {
+      // Remove from cart
+      await remove_from_cart(lastSegment.value)
+      // pinia.state.cart = pinia.state.cart?.filter(item => item.product._id !== productId);
+    } else {
+      // Add to cart
+      const payload = {
+        productId:lastSegment.value,
+        quantity:quantity.value
+      }
+
+      add_cart(payload)
+
+      // const productToAdd = pinia.state.products.find(p => p._id === productId);
+      // if (productToAdd) {
+      //   pinia.state.cart.push({product:productToAdd,quantity:1});
+      // }
+    }
+  };
+
+
+  onMounted(()=>{
+    lastSegment.value = route.params.id 
+    myproduct.value = pinia.state.products?.find(product => product._id === lastSegment.value)
+    console.log( myproduct.value)
+  })
 
 </script>

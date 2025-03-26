@@ -54,8 +54,8 @@
 
               {{ isInCart(product._id) ? 'Remove from Cart' : 'Add to Cart' }}
 
-              <n-spin class="pl-1" v-if="pinia.state.isAddingToCart && !isInCart(product._id)" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
-              <n-spin class="pl-1" v-if="pinia.state.isRemovingFromCart && isInCart(product._id)" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+              <n-spin class="pl-1" v-if="pinia.state.isAddingToCart && !isInCart(product._id) &&  selectedProductId === product._id" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
+              <n-spin class="pl-1" v-if="pinia.state.isRemovingFromCart && isInCart(product._id) &&  selectedProductId === product._id" size="20px" stroke="#fff"  style="stroke: 10px !important"/>
 
             </n-button>
           </div>
@@ -105,6 +105,8 @@
   // State
   const currentPg = ref(null);
   const productCards = ref(null);
+
+  const selectedProductId = ref(null)
   
   // Emit
   const emit = defineEmits(['like-product']);
@@ -117,6 +119,7 @@
 
   // Toggle cart (add or remove)
   const toggleCart = async(productId) => {
+    selectedProductId.value = productId
     console.log(isInCart(productId))
     if (isInCart(productId)) {
       // Remove from cart
@@ -125,7 +128,8 @@
     } else {
       // Add to cart
       const payload = {
-        productId
+        productId,
+        quantity:1
       }
       add_cart(payload)
 

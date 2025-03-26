@@ -71,7 +71,7 @@ export const  add_cart = async (payload) => {
       if (data.success) {
       const productToAdd = pinia.state.products.find(p => p._id === payload.productId);
       if (productToAdd) {
-        pinia.state.cart.push({product:productToAdd,quantity:1});
+        pinia.state.cart.push({product:productToAdd, quantity: payload.quantity});
       }
 
       }
