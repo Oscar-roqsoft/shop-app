@@ -1,6 +1,7 @@
 <template>
     <div class="min-h-[80vh] pt-[160px] pb-[50px] md:pt-[130px]">
       <div class="md:max-w-[1200px] mx-auto w-full h-full px-4 md:px-0 text-white">
+        
         <n-breadcrumb class="mb-[24px]">
           <n-breadcrumb-item> Home </n-breadcrumb-item>
           <n-breadcrumb-item> Cart </n-breadcrumb-item>

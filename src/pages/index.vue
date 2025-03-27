@@ -161,9 +161,11 @@ onMounted(async()=>{
 
 
 onMounted(async()=>{
-    if(pinia.state?.cart.length) return
-    await get_all_cart()
-    
+    if(pinia.state.isAuthenticated){
+        if(pinia.state?.cart.length) return
+        await get_all_cart()
+        
+    }
 })
 </script>
 
