@@ -228,6 +228,9 @@
     useRouter().push(path)
     pinia.state.selectedNavMenu = label
     toggleMenu()
+    if(path === 'sign out'){
+      pinia.clearUser
+    }
   }
 
   const renderIcon = (svgPath) => {
